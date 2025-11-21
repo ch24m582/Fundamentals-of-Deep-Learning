@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction - PRML Solutions</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/math-config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+        
+        <header>
+            <h1>Chapter 1: Introduction</h1>
+            <p class="subtitle">Foundations of Pattern Recognition and Machine Learning</p>
+        </header>
+        
+        <div class="chapter-intro">
+            <p>This chapter introduces fundamental concepts in machine learning including probability theory, decision theory, and information theory. The exercises cover basic probability rules, curve fitting, and regularization.</p>
+        </div>
+        
+        <div class="chapter">
+            <div class="problem">
+                <h3>Problem 1.1</h3>
+                
+                <div class="problem-statement">
+                    Show that the sum and product rules of probability can be written as:
+                    \[
+                    p(X) = \sum_Y p(X, Y)
+                    \]
+                    \[
+                    p(X, Y) = p(Y|X)p(X)
+                    \]
+                </div>
+                
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    
+                    <div class="step">
+                        <strong>Sum Rule:</strong>
+                        <p>The sum rule states that the marginal probability can be obtained by summing the joint probability over all possible values of the other variable.</p>
+                        <p>Starting from the definition of joint probability:</p>
+                        \[
+                        p(X) = \sum_{Y} p(X, Y)
+                        \]
+                        <p>This makes intuitive sense: to find the probability of X, we sum over all the ways X can occur with different values of Y.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Product Rule:</strong>
+                        <p>The product rule relates joint probability to conditional probability:</p>
+                        \[
+                        p(X, Y) = p(Y|X)p(X)
+                        \]
+                        <p>We can derive this from the definition of conditional probability:</p>
+                        \[
+                        p(Y|X) = \frac{p(X, Y)}{p(X)}
+                        \]
+                        <p>Multiplying both sides by $p(X)$ gives us the product rule.</p>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>Note:</strong> These two rules form the foundation of probability theory and are used extensively throughout the book. The product rule can also be written symmetrically as $p(X,Y) = p(X|Y)p(Y)$.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <h3>Problem 1.2</h3>
+                
+                <div class="problem-statement">
+                    [Add problem statement here]
+                </div>
+                
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    
+                    <div class="step">
+                        [Add your solution here]
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add more problems following the same structure -->
+            
+        </div>
+        
+        <footer>
+            <p><a href="../index.html">Home</a> | <a href="chapter2.html">Next Chapter →</a></p>
+            <p style="margin-top: 10px;">Created with ❤️ for the ML community</p>
+        </footer>
+    </div>
+</body>
+</html>
