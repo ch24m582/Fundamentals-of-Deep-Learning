@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRML Solutions - Pattern Recognition and Machine Learning</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+        
+        nav {
+            margin: 30px 0;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        nav h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin: 10px 0;
+        }
+        
+        nav a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .chapter {
+            margin: 40px 0;
+        }
+        
+        .chapter h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+        
+        .problem {
+            margin: 30px 0;
+            padding: 25px;
+            background: #fafafa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .problem h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .problem-statement {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .solution {
+            margin-top: 20px;
+        }
+        
+        .solution h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .step {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .note strong {
+            color: #856404;
+        }
+        
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PRML Solutions</h1>
+            <p class="subtitle">Pattern Recognition and Machine Learning by Christopher Bishop</p>
+            <p class="subtitle">Detailed Solutions with Explanations</p>
+        </header>
+        
+        <nav>
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#chapter1">Chapter 1: Introduction</a></li>
+                <li><a href="#chapter2">Chapter 2: Probability Distributions</a></li>
+                <li><a href="#chapter3">Chapter 3: Linear Models for Regression</a></li>
+                <!-- Add more chapters as needed -->
+            </ul>
+        </nav>
+        
+        <div class="chapter" id="chapter1">
+            <h2>Chapter 1: Introduction</h2>
+            
+            <div class="problem">
+                <h3>Problem 1.1</h3>
+                
+                <div class="problem-statement">
+                    Show that the sum and product rules of probability can be written as:
+                    \[
+                    p(X) = \sum_Y p(X, Y)
+                    \]
+                    \[
+                    p(X, Y) = p(Y|X)p(X)
+                    \]
+                </div>
+                
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    
+                    <div class="step">
+                        <strong>Sum Rule:</strong>
+                        <p>The sum rule states that the marginal probability can be obtained by summing the joint probability over all possible values of the other variable.</p>
+                        <p>Starting from the definition of joint probability:</p>
+                        \[
+                        p(X) = \sum_{Y} p(X, Y)
+                        \]
+                        <p>This makes intuitive sense: to find the probability of X, we sum over all the ways X can occur with different values of Y.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <strong>Product Rule:</strong>
+                        <p>The product rule relates joint probability to conditional probability:</p>
+                        \[
+                        p(X, Y) = p(Y|X)p(X)
+                        \]
+                        <p>We can derive this from the definition of conditional probability:</p>
+                        \[
+                        p(Y|X) = \frac{p(X, Y)}{p(X)}
+                        \]
+                        <p>Multiplying both sides by \(p(X)\) gives us the product rule.</p>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>Note:</strong> These two rules form the foundation of probability theory and are used extensively throughout the book. The product rule can also be written symmetrically as \(p(X,Y) = p(X|Y)p(Y)\).
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Template for adding more problems -->
+            <div class="problem">
+                <h3>Problem 1.2</h3>
+                
+                <div class="problem-statement">
+                    <!-- Add problem statement here -->
+                    [Problem statement goes here...]
+                </div>
+                
+                <div class="solution">
+                    <h4>Solution:</h4>
+                    
+                    <div class="step">
+                        <!-- Add solution steps here -->
+                        [Your solution steps...]
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Template for additional chapters -->
+        <div class="chapter" id="chapter2">
+            <h2>Chapter 2: Probability Distributions</h2>
+            <p style="color: #7f8c8d; font-style: italic;">Solutions coming soon...</p>
+        </div>
+        
+        <footer>
+            <p>Created with ❤️ for the ML community | Hosted on GitHub Pages</p>
+            <p><a href="https://github.com/yourusername/Foundations-of-ML" style="color: #3498db;">View on GitHub</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Auto-render LaTeX math when page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html>
