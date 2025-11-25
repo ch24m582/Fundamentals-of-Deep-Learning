@@ -1,0 +1,262 @@
+<!-- chapter1.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Linear Models for Regression - PRML Solutions</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script defer src="../js/math-config.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+
+        <header>
+            <h1>Chapter 1: Linear Models for Regression</h1>
+        </header>
+
+        <div class="chapter-intro">
+            <p>This chapter mostly deals with linear models for regression and their basis functions (a fancy way of
+                saying function on 'x').
+                This equation will come up a lot:
+                \[
+                y(x) = w_0 + \sum_{i=1}^N w_i\,\phi\!\left({x}\right)\quad (1.1)
+                \]
+                where 'N' is the total number of features and w_i is the weight associated to the i_th feature.
+            </p>
+        </div>
+
+        <div class="chapter">
+            <div class="problem">
+                <h3>Problem 1.1</h3>
+
+                <div class="context">
+                    <h4>Context</h4>
+                    <img src="../assets/LR.png" alt="Linear Regression Illustration" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy">
+                </div>
+
+                <div class="problem-statement">
+                    <h4>Question</h4>
+                    <p>Show that the 'tanh' and the logistic sigmoid functions are related by:</p>
+                    \[
+                    \tanh(a) = 2\,\sigma(2a) - 1
+                    \]
+                    <p>Hence show that a general linear combination of logistic sigmoid functions of the form:</p>
+                    \[
+                    y(x,w) = w_0 + \sum_{j=1}^M w_j\,\sigma\!\left(\frac{x-\mu_j}{s}\right) \quad (1.101)
+                    \]
+                    <p>is equivalent to a linear combination of \(\tanh\) functions of the form:</p>
+                    \[
+                    y(x,u) = u_0 + \sum_{j=1}^M u_j\,\tanh\!\left(\frac{x-\mu_j}{s}\right) \quad (1.102)
+                    \]
+                    <p>and find expressions relating the new parameters \(\{u_j\}\) to the original parameters
+                        \(\{w_j\}\).</p>
+                </div>
+
+                <div class="solution">
+                    <h4>Solution:</h4>
+
+                    <div class="step">
+                        <strong>Part 1: Proving the relationship between tanh and sigmoid</strong>
+                        <p>We know that the logistic function:</p>
+                        \[
+                        \sigma(a) = \frac{1}{1 + e^{-a}}
+                        \]
+                        <p>and the RHS can be written as</p>
+                        \[
+                        2 . \frac{1}{1 + e^{-2a}} - 1 => \frac{2e^{2a}}{1 + e^{2a}} - 1
+                        \]
+                        <p>solving the above equation gives us</p>
+                        \[
+                        \frac{e^{2a} - 1}{e^{2a} + 1}
+                        \]
+                        <p>which is nothing but \(\tanh(a)\) (a different form though)</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Part 2: Converting sigmoid combination to tanh combination</strong>
+                        <p>We can rewrite the relationship as:</p>
+                        \[
+                        \sigma(a) = \frac{\tanh\left(\frac{a}{2}\right) + 1}{2}
+                        \]
+                        <p>Substitute this relation into equation (1.101):</p>
+                        \[
+                        \begin{aligned}
+                        y(x,w) &= w_0 + \sum_{j=1}^M w_j\,\sigma\!\left(\frac{x-\mu_j}{s}\right) \\
+                        &= w_0 + \sum_{j=1}^M w_j\cdot\frac{1}{2}\left[\tanh\!\left(\frac{x-\mu_j}{2s}\right) + 1\right]
+                        \\
+                        &= \left(w_0 + \frac{1}{2}\sum_{j=1}^M w_j\right) + \sum_{j=1}^M
+                        \frac{w_j}{2}\,\tanh\!\left(\frac{x-\mu_j}{2s}\right)
+                        \end{aligned}
+                        \]
+                        <p>which aligns to eqn (1.102) (not sure if there's a printing mistake but you get the idea)</p>
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Key Insight:</strong> The sigmoid and the hyperbolic tangent are affine transforms of
+                        each other (up to a scale change in the argument), so linear combinations of one family can
+                        always be expressed as linear combinations of the other by simple rescaling of parameters. This
+                        shows that neural networks using sigmoid vs tanh activations are fundamentally equivalent in
+                        their representational power.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Template for next problem -->
+            <div class="problem">
+                <h3>Problem 1.2</h3>
+
+                <div class="context">
+                    <h4>Context</h4>
+
+                    <img src="../assets/target_var.png" alt="Linear Regression Illustration" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy">
+
+                    <p>The above graph represents a real life scenario where there's always a noise associated with the
+                        target variable. This can be generalised by the below equation:</p>
+                    \[
+                    t = y(x, \mathbf{w}) + \epsilon
+                    \]
+
+                    <p>where \(\epsilon\) represents the Gaussian noise.</p>
+
+                    <p>In order to learn the spread or uncertainity (as \(y(x, \mathbf{w})\) will just predict a value
+                        but we're more interested in the distribution), we'll calculate the probability of the target
+                        variable given the input and parameters.</p>
+
+                    \[
+                    p(t_n|x_n, \mathbf{w}, \beta) = \mathcal{N}(t_n|y(x_n, \mathbf{w}), \beta^{-1})
+                    \]
+
+                    <p>where \(\beta\) is the precision (inverse of the variance) of the Gaussian noise.</p>
+
+                    <p>Now assuming all the data points are independent,</p>
+
+                    \[
+                    p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta) = \prod_{n=1}^{N} \mathcal{N}(t_n|y(x_n, \mathbf{w}),
+                    \beta^{-1})
+                    \]
+
+                    <p>where \(\mathbf{t}\) is the column vector representing the target values for all data points.</p>
+
+                    <p>Taking the logarithm of the likelihood function, we get the log-likelihood:</p>
+
+                    \[
+                    \ln p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta) = \frac{N}{2}\ln \beta - \frac{N}{2}\ln(2\pi) -
+                    \beta E_D(\mathbf{w}) \quad
+                    \]
+
+                    <p>where \(E_D(\mathbf{w})\) is the sum-of-squares error function defined as:</p>
+
+                    \[
+                    E_D(\mathbf{w}) = \frac{1}{2}\sum_{n=1}^{N} \left\{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \right\}^2
+                    \]
+
+                    <p>Maximizing the log-likelihood is equivalent to minimizing the sum-of-squares error function. We
+                        take the gradient with respect to \(\mathbf{w}\):</p>
+
+                    \[
+                    \nabla_{\mathbf{w}} \ln p = -\beta \nabla_{\mathbf{w}} \left( \frac{1}{2} \sum_{n=1}^{N} \{t_n -
+                    \mathbf{w}^T \phi(\mathbf{x}_n)\}^2 \right) = 0
+                    \]
+                    
+                    \[
+                    \sum_{n=1}^{N} \{t_n - \mathbf{w}^T \phi(\mathbf{x}_n)\} \phi(\mathbf{x}_n)^T = 0
+                    \]
+                    
+                    \[\Rightarrow \sum_{n=1}^{N} t_n \phi(\mathbf{x}_n)^T = \sum_{n=1}^{N} \phi(\mathbf{x}_n) \phi(\mathbf{x}_n)^T
+                    \mathbf{w}
+                    \]
+                    
+                    \[\Rightarrow \Phi^T \mathbf{t} = \Phi^T \Phi \mathbf{w}
+                    \]
+
+                    \[\Rightarrow \mathbf{w} = (\Phi^T \Phi)^{-1} \Phi^T \mathbf{t}
+                    \]
+                    
+                </div>
+
+                <div class="problem-statement">
+                    <h4>Question</h4>
+                    <p>Show that the matrix
+                        \[
+                        H = \Phi(\Phi^{T}\Phi)^{-1}\Phi^{T} \tag{1.103}
+                        \]
+                        takes any vector \( \mathbf{v} \) and projects it onto the space spanned by the columns of \(
+                        \Phi \).
+                        Use this result to show that the least-squares solution
+                        \[
+                        \mathbf{y} = \Phi\mathbf{w}_{\text{LS}} = \Phi(\Phi^{T}\Phi)^{-1}\Phi^{T}\mathbf{t} \
+                        \]
+                        corresponds to an orthogonal projection of the vector \( \mathbf{t} \) onto the manifold \(
+                        \mathcal{S} \).
+                    </p>
+                </div>
+
+                <div class="solution">
+                    <h4>Solution:</h4>
+
+                    <div class="step">
+                        <strong>Part 1: The Projection Property</strong>
+                        <p>Let's define our matrix as \(H\) (the Hat Matrix). If we multiply it by any arbitrary vector
+                            \(\mathbf{v}\):</p>
+                        \[
+                        \mathbf{u} = H\mathbf{v} = \Phi \underbrace{\left[ (\Phi^T\Phi)^{-1}\Phi^T \mathbf{v}
+                        \right]}_{\text{some vector } \mathbf{a}}
+                        \]
+                        <p>The result \(\mathbf{u}\) is equal to \(\Phi \mathbf{a}\). By definition, any vector \(\Phi
+                            \mathbf{a}\) is a linear combination of the columns of \(\Phi\). Therefore, \(H\) maps any
+                            vector into the column space of \(\Phi\).</p>
+                    </div>
+
+                    <div class="step">
+                        <strong>Part 2: Orthogonality of the Least Squares Solution</strong>
+                        <p>The least squares prediction is \(\mathbf{y} = H\mathbf{t}\). The residual (error) vector is:
+                        </p>
+                        \[
+                        \mathbf{r} = \mathbf{t} - \mathbf{y} = (I - H)\mathbf{t}
+                        \]
+                        <p>For the projection to be <strong>orthogonal</strong>, the residual \(\mathbf{r}\) must be
+                            perpendicular to the subspace (the columns of \(\Phi\)). We check the dot product \(\Phi^T
+                            \mathbf{r}\):</p>
+                        \[
+                        \begin{aligned}
+                        \Phi^T \mathbf{r} &= \Phi^T (\mathbf{t} - \Phi(\Phi^T\Phi)^{-1}\Phi^T \mathbf{t}) \\
+                        &= \Phi^T \mathbf{t} - (\Phi^T\Phi)(\Phi^T\Phi)^{-1}\Phi^T \mathbf{t} \\
+                        &= \Phi^T \mathbf{t} - I \cdot \Phi^T \mathbf{t} \\
+                        &= 0
+                        \end{aligned}
+                        \]
+                        <p>Since the dot product is zero, the residual is orthogonal to the column space.</p>
+
+                        <img src="../assets/error_vec.png" alt="Linear Regression Illustration" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy">
+                    </div>
+
+                    <div class="note">
+                        <strong>💡 Key Insight:</strong> This proves that minimizing the sum-of-squares error (algebraic
+                        view) is identical to finding the orthogonal projection of the data vector onto the model
+                        subspace (geometric view).
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <p><a href="../index.html">Home</a> | <a href="chapter2.html">Next Chapter →</a></p>
+            <p style="margin-top: 10px;">Created with ❤️ for the ML community</p>
+        </footer>
+    </div>
+</body>
+
+</html>
