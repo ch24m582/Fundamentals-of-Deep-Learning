@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 1: Linear Models for Regression - PRML Solutions</title>
+    <title>Chapter 1: Basics Needed for Deep Learning</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -20,17 +20,18 @@
         <a href="../index.html" class="back-link">← Back to Home</a>
 
         <header>
-            <h1>Chapter 1: Linear Models for Regression</h1>
+            <h1>Chapter 1: Basics Needed for Deep Learning</h1>
         </header>
 
         <div class="chapter-intro">
-            <p>This chapter mostly deals with linear models for regression and their basis functions (a fancy way of
-                saying function on 'x').
-                This equation will come up a lot:
+            <p>
                 \[
-                y(x) = w_0 + \sum_{i=1}^N w_i\,\phi\!\left({x}\right)\quad (1.1)
+                y = h(x) = w_0 + w_1x_1 + w_2x_2 + w_3x_1x_2
                 \]
-                where 'N' is the total number of features and w_i is the weight associated to the i_th feature.
+                - Guess the form of the hypothesis function for a problem with N features.<br>
+                - here the form is linear combination of the features and their interactions.<br>
+                - we will fix the form of the hypothesis function and learn the parameters (weights) from data.
+                
             </p>
         </div>
 
