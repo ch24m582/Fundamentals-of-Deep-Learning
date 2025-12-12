@@ -115,22 +115,53 @@
 
                 </div>
 
-                <div class="problem-statement">
-                    <h4>Question</h4>
-                    <p>Show that the 'tanh' and the logistic sigmoid functions are related by:</p>
+                <div class="note">
+                    <h4>Notes</h4>
+                    <p>
+                        \[ J(w) =\frac{1}{2m} ||XW-Y ||^2 \]
+                        Let us say
+                        <p style="text-align:center;">$R = C^{\mathrm{T}} W = [\,c_1 \; c_2 \; \cdots \; c_n\,]
+                        \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \end{bmatrix}$</p>
+                        where \(C\) is a constant vector independent of \(W\). Then,
+                        \[
+                        \frac{\partial R}{\partial w}
+                        = \begin{bmatrix}
+                        \frac{\partial R}{\partial w_1} \\
+                        \frac{\partial R}{\partial w_2} \\
+                        \vdots \\
+                        \frac{\partial R}{\partial w_n}
+                        \end{bmatrix}
+                        = \begin{bmatrix}
+                        c_1 \\
+                        c_2 \\
+                        \vdots \\
+                        c_n
+                        \end{bmatrix} 
+                        = C
+                        \]
+                    </p>
+                    Now say,
+                    <p style="text-align:center;"> 
+                         $R = W^{\mathrm{T}} C = [\,w_1 \; w_2 \; \cdots \; w_n\,]
+                        \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix}$</p>
+                        then also,
+                        \[
+                        \frac{\partial R}{\partial w}
+                        = C 
+                        \] 
+                    </p>
+                    Hence, 
                     \[
-                    \tanh(a) = 2\,\sigma(2a) - 1
+                    \frac{\partial }{\partial w} (W^{\mathrm{T}} C) = \frac{\partial }{\partial w} (C^{\mathrm{T}} W) = C
                     \]
-                    <p>Hence show that a general linear combination of logistic sigmoid functions of the form:</p>
-                    \[
-                    y(x,w) = w_0 + \sum_{j=1}^M w_j\,\sigma\!\left(\frac{x-\mu_j}{s}\right) \quad (1.101)
-                    \]
-                    <p>is equivalent to a linear combination of \(\tanh\) functions of the form:</p>
-                    \[
-                    y(x,u) = u_0 + \sum_{j=1}^M u_j\,\tanh\!\left(\frac{x-\mu_j}{s}\right) \quad (1.102)
-                    \]
-                    <p>and find expressions relating the new parameters \(\{u_j\}\) to the original parameters
-                        \(\{w_j\}\).</p>
+                    <br>
+                    <p style="text-align:center;">
+                        Consider $R = W^{\mathrm{T}} X^{\mathrm{T}} X W$. Assume $A = X^{\mathrm{T}} X$, then <br>
+                        $\frac{\partial R}{\partial W} = AW + A^{\mathrm{T}} W = 2AW = 2X^{\mathrm{T}} X W$ (since $A$ is symmetric).
+                    </p>
+
+
+
                 </div>
 
                 <div class="solution">
@@ -183,145 +214,7 @@
             </div>
 
             <!-- Template for next problem -->
-            <div class="problem">
-                <h3>Problem 1.2</h3>
-
-                <div class="context">
-                    <h4>Context</h4>
-
-                    <img src="../assets/target_var.png" alt="Linear Regression Illustration" class="context-image"
-                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy">
-
-                    <p>The above graph represents a real life scenario where there's always a noise associated with the
-                        target variable. This can be generalised by the below equation:</p>
-                    \[
-                    t = y(x, \mathbf{w}) + \epsilon
-                    \]
-
-                    <p>where \(\epsilon\) represents the Gaussian noise.</p>
-
-                    <p>In order to learn the spread or uncertainity (as \(y(x, \mathbf{w})\) will just predict a value
-                        but we're more interested in the distribution), we'll calculate the probability of the target
-                        variable given the input and parameters.</p>
-
-                    \[
-                    p(t_n|x_n, \mathbf{w}, \beta) = \mathcal{N}(t_n|y(x_n, \mathbf{w}), \beta^{-1})
-                    \]
-
-                    <p>where \(\beta\) is the precision (inverse of the variance) of the Gaussian noise.</p>
-
-                    <p>Now assuming all the data points are independent,</p>
-
-                    \[
-                    p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta) = \prod_{n=1}^{N} \mathcal{N}(t_n|y(x_n, \mathbf{w}),
-                    \beta^{-1})
-                    \]
-
-                    <p>where \(\mathbf{t}\) is the column vector representing the target values for all data points.</p>
-
-                    <p>Taking the logarithm of the likelihood function, we get the log-likelihood:</p>
-
-                    \[
-                    \ln p(\mathbf{t}|\mathbf{X}, \mathbf{w}, \beta) = \frac{N}{2}\ln \beta - \frac{N}{2}\ln(2\pi) -
-                    \beta E_D(\mathbf{w}) \quad
-                    \]
-
-                    <p>where \(E_D(\mathbf{w})\) is the sum-of-squares error function defined as:</p>
-
-                    \[
-                    E_D(\mathbf{w}) = \frac{1}{2}\sum_{n=1}^{N} \left\{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \right\}^2
-                    \]
-
-                    <p>Maximizing the log-likelihood is equivalent to minimizing the sum-of-squares error function. We
-                        take the gradient with respect to \(\mathbf{w}\):</p>
-
-                    \[
-                    \nabla_{\mathbf{w}} \ln p = -\beta \nabla_{\mathbf{w}} \left( \frac{1}{2} \sum_{n=1}^{N} \{t_n -
-                    \mathbf{w}^T \phi(\mathbf{x}_n)\}^2 \right) = 0
-                    \]
-                    
-                    \[
-                    \sum_{n=1}^{N} \{t_n - \mathbf{w}^T \phi(\mathbf{x}_n)\} \phi(\mathbf{x}_n)^T = 0
-                    \]
-                    
-                    \[\Rightarrow \sum_{n=1}^{N} t_n \phi(\mathbf{x}_n)^T = \sum_{n=1}^{N} \phi(\mathbf{x}_n) \phi(\mathbf{x}_n)^T
-                    \mathbf{w}
-                    \]
-                    
-                    \[\Rightarrow \Phi^T \mathbf{t} = \Phi^T \Phi \mathbf{w}
-                    \]
-
-                    \[\Rightarrow \mathbf{w} = (\Phi^T \Phi)^{-1} \Phi^T \mathbf{t}
-                    \]
-                    
-                </div>
-
-                <div class="problem-statement">
-                    <h4>Question</h4>
-                    <p>Show that the matrix
-                        \[
-                        H = \Phi(\Phi^{T}\Phi)^{-1}\Phi^{T} \tag{1.103}
-                        \]
-                        takes any vector \( \mathbf{v} \) and projects it onto the space spanned by the columns of \(
-                        \Phi \).
-                        Use this result to show that the least-squares solution
-                        \[
-                        \mathbf{y} = \Phi\mathbf{w}_{\text{LS}} = \Phi(\Phi^{T}\Phi)^{-1}\Phi^{T}\mathbf{t} \
-                        \]
-                        corresponds to an orthogonal projection of the vector \( \mathbf{t} \) onto the manifold \(
-                        \mathcal{S} \).
-                    </p>
-                </div>
-
-                <div class="solution">
-                    <h4>Solution:</h4>
-
-                    <div class="step">
-                        <strong>Part 1: The Projection Property</strong>
-                        <p>Let's define our matrix as \(H\) (the Hat Matrix). If we multiply it by any arbitrary vector
-                            \(\mathbf{v}\):</p>
-                        \[
-                        \mathbf{u} = H\mathbf{v} = \Phi \underbrace{\left[ (\Phi^T\Phi)^{-1}\Phi^T \mathbf{v}
-                        \right]}_{\text{some vector } \mathbf{a}}
-                        \]
-                        <p>The result \(\mathbf{u}\) is equal to \(\Phi \mathbf{a}\). By definition, any vector \(\Phi
-                            \mathbf{a}\) is a linear combination of the columns of \(\Phi\). Therefore, \(H\) maps any
-                            vector into the column space of \(\Phi\).</p>
-                    </div>
-
-                    <div class="step">
-                        <strong>Part 2: Orthogonality of the Least Squares Solution</strong>
-                        <p>The least squares prediction is \(\mathbf{y} = H\mathbf{t}\). The residual (error) vector is:
-                        </p>
-                        \[
-                        \mathbf{r} = \mathbf{t} - \mathbf{y} = (I - H)\mathbf{t}
-                        \]
-                        <p>For the projection to be <strong>orthogonal</strong>, the residual \(\mathbf{r}\) must be
-                            perpendicular to the subspace (the columns of \(\Phi\)). We check the dot product \(\Phi^T
-                            \mathbf{r}\):</p>
-                        \[
-                        \begin{aligned}
-                        \Phi^T \mathbf{r} &= \Phi^T (\mathbf{t} - \Phi(\Phi^T\Phi)^{-1}\Phi^T \mathbf{t}) \\
-                        &= \Phi^T \mathbf{t} - (\Phi^T\Phi)(\Phi^T\Phi)^{-1}\Phi^T \mathbf{t} \\
-                        &= \Phi^T \mathbf{t} - I \cdot \Phi^T \mathbf{t} \\
-                        &= 0
-                        \end{aligned}
-                        \]
-                        <p>Since the dot product is zero, the residual is orthogonal to the column space.</p>
-
-                        <img src="../assets/error_vec.png" alt="Linear Regression Illustration" class="context-image"
-                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy">
-                    </div>
-
-                    <div class="note">
-                        <strong>💡 Key Insight:</strong> This proves that minimizing the sum-of-squares error (algebraic
-                        view) is identical to finding the orthogonal projection of the data vector onto the model
-                        subspace (geometric view).
-                    </div>
-                </div>
-            </div>
-
-        </div>
+            
 
         <footer>
             <p><a href="../index.html">Home</a> | <a href="chapter2.html">Next Chapter →</a></p>
