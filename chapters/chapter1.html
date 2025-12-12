@@ -28,6 +28,8 @@
                 \[
                 y = h(x) = w_0 + w_1x_1 + w_2x_2 + w_3x_1x_2
                 \]
+                <img src="../assets/LinearForm.png" alt="Linear Regression Illustration" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
                 - Guess the form of the hypothesis function for a problem with N features.<br>
                 - here the form is linear combination of the features and their interactions.<br>
                 - we will fix the form of the hypothesis function and learn the parameters (weights) from data.
@@ -37,12 +39,80 @@
 
         <div class="Gradient-Descent">
             <div class="Gradient-Descent">
-                <h3>Gradient-Descent</h3>
+                <h2>Gradient-Descent</h2>
 
                 <div class="Gradient-Descent Algorithm">
-                    <h4>Algo</h4>
-                    <!--img src="../assets/LR.png" alt="Linear Regression Illustration" class="context-image"
-                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
+                    <h4>Gradient Descent Update Rule</h4>
+                    <p>
+                    \[
+                    w^{(t+1)} = w^t - \alpha \nabla_w J(w^t)
+                    \]
+                    <h4>Stoppping criteria:</h4>
+                    \[
+                    ||w^{(t+1)} - w^t|| &equiv; || \nabla_w J(w^t) || &equiv; || J(W^{(t+1)} - J(w^t)) || < \epsilon
+                    \]
+                    </p>
+                </div>
+
+                <div class ="Gradient Descent for Linear Regression">
+                    <h4>Gradient Descent for Linear Regression</h4>
+                    <p>
+                    <p style="text-align:center;">
+                        $y = w_0 + w_1x$ &nbsp;&nbsp;  (We always assume m as total samples)
+                    </p>
+                        \[J(w_0,w_1) = \frac{1}{2m} \sum_{i=1}^{m} \big(\hat{y}^{(i)} - y^{(i)}\big)^2\]
+                        \[J(w_0,w_1) = \frac{1}{2m} \sum_{i=1}^{m} \big(w_0 + w_1x^{(i)} - y^{(i)}\big)^2\]
+                        \[\frac{\partial J}{\partial w_0} = \frac{1}{m}\sum_{i=1}^{m}\big(\hat{y}^{(i)}-y^{(i)}\big).1\]
+                        \[\frac{\partial J}{\partial w_1} = \frac{1}{m}\sum_{i=1}^{m}\big(\hat{y}^{(i)}-y^{(i)}\big).x^{(i)}\]
+                        \[w_0 = w_0 - \alpha\frac{\partial J}{\partial w_0} \]
+                        \[w_1 = w_1 - \alpha\frac{\partial J}{\partial w_1} \]
+                    
+                    </p>
+
+                    <h4>Gradient Descent for Quadratic Regression</h4>
+                    <p>
+                    <p style="text-align:center;">
+                        $y = w_0 + w_1x + w_2 x^2$ 
+                    </p>
+                        \[\frac{\partial J}{\partial w_0} = \frac{1}{m}\sum_{i=1}^{m}\big(\hat{y}^{(i)}-y^{(i)}\big).1\]
+                        \[\frac{\partial J}{\partial w_1} = \frac{1}{m}\sum_{i=1}^{m}\big(\hat{y}^{(i)}-y^{(i)}\big).x^{(i)}\]
+                        \[\frac{\partial J}{\partial w_2} = \frac{1}{m}\sum_{i=1}^{m}\big(\hat{y}^{(i)}-y^{(i)}\big).{x^{(i)}}^2\]
+                        \[w_0 = w_0 - \alpha\frac{\partial J}{\partial w_0} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        w_1 = w_1 - \alpha\frac{\partial J}{\partial w_1} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        w_2 = w_2 - \alpha\frac{\partial J}{\partial w_2} \]
+                    
+                    </p>   
+                    <h4>How a typical data matrix and y looks like</h4>
+                    <p> 
+                        \[
+                        \begin{bmatrix}
+                        1 & x_1^{(1)} & x_2^{(1)} & \ldots & x_n^1 \\
+                        1 & x_1^{(2)} & x_2^{(2)} & \ldots & x_n^2 \\
+                        \vdots & \vdots  & \ddots & \vdots \\
+                        1 & x_1^{(m)} & x_2^{(m)} & \ldots & x_n^m 
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                        w_0 \\
+                        w_1 \\
+                        \vdots \\
+                        w_n
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                        y^{(1)} \\
+                        y^{(2)} \\
+                        \vdots \\
+                        y^{(m)}
+                        \end{bmatrix}
+                        \]
+                    </p>
+                    <p style="text-align:center;"> 
+                      A typical input can be as weird as shown below:
+                      \[x_i^m = sin(\omega x_j^m) &nbsp;&nbsp;or&nbsp;&nbsp; x_i^m = log(\omega x_j^m)  &nbsp;&nbsp;or&nbsp;&nbsp; x_i^m = \exp\left(-\frac{(x_j^{(m)} - \mu_j)^2}{2\sigma_j^2}\right) \]
+                      Weights will remain linear but the input can be as weired 
+                    </p>
+
+
                 </div>
 
                 <div class="problem-statement">
