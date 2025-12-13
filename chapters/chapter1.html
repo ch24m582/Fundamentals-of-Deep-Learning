@@ -164,52 +164,10 @@
 
                 </div>
 
-                <div class="solution">
-                    <h4>Solution:</h4>
+                <div class="code">
+                    <h4>Code:</h4>
+                    <pre><code class="python">
 
-                    <div class="step">
-                        <strong>Part 1: Proving the relationship between tanh and sigmoid</strong>
-                        <p>We know that the logistic function:</p>
-                        \[
-                        \sigma(a) = \frac{1}{1 + e^{-a}}
-                        \]
-                        <p>and the RHS can be written as</p>
-                        \[
-                        2 . \frac{1}{1 + e^{-2a}} - 1 => \frac{2e^{2a}}{1 + e^{2a}} - 1
-                        \]
-                        <p>solving the above equation gives us</p>
-                        \[
-                        \frac{e^{2a} - 1}{e^{2a} + 1}
-                        \]
-                        <p>which is nothing but \(\tanh(a)\) (a different form though)</p>
-                    </div>
-
-                    <div class="step">
-                        <strong>Part 2: Converting sigmoid combination to tanh combination</strong>
-                        <p>We can rewrite the relationship as:</p>
-                        \[
-                        \sigma(a) = \frac{\tanh\left(\frac{a}{2}\right) + 1}{2}
-                        \]
-                        <p>Substitute this relation into equation (1.101):</p>
-                        \[
-                        \begin{aligned}
-                        y(x,w) &= w_0 + \sum_{j=1}^M w_j\,\sigma\!\left(\frac{x-\mu_j}{s}\right) \\
-                        &= w_0 + \sum_{j=1}^M w_j\cdot\frac{1}{2}\left[\tanh\!\left(\frac{x-\mu_j}{2s}\right) + 1\right]
-                        \\
-                        &= \left(w_0 + \frac{1}{2}\sum_{j=1}^M w_j\right) + \sum_{j=1}^M
-                        \frac{w_j}{2}\,\tanh\!\left(\frac{x-\mu_j}{2s}\right)
-                        \end{aligned}
-                        \]
-                        <p>which aligns to eqn (1.102) (not sure if there's a printing mistake but you get the idea)</p>
-                    </div>
-
-                    <div class="note">
-                        <strong>💡 Key Insight:</strong> The sigmoid and the hyperbolic tangent are affine transforms of
-                        each other (up to a scale change in the argument), so linear combinations of one family can
-                        always be expressed as linear combinations of the other by simple rescaling of parameters. This
-                        shows that neural networks using sigmoid vs tanh activations are fundamentally equivalent in
-                        their representational power.
-                    </div>
                 </div>
             </div>
 
