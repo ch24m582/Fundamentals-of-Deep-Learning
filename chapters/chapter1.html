@@ -159,6 +159,19 @@
                         Consider $R = W^{\mathrm{T}} X^{\mathrm{T}} X W$. Assume $A = X^{\mathrm{T}} X$, then <br>
                         $\frac{\partial R}{\partial W} = AW + A^{\mathrm{T}} W = 2AW = 2X^{\mathrm{T}} X W$ (since $A$ is symmetric).
                     </p>
+                    <p>
+                        <br>Let us use above tricks to derive closed form of w
+                        \[ J = ||XW - Y||^2\]
+                        \[J = (XW - Y)^{\mathrm{T}}(XW - Y) = W^{\mathrm{T}}X^{\mathrm{T}}XW - 2Y^{\mathrm{T}}XW + Y^{\mathrm{T}}Y \]
+                        \[\frac{\partial J}{\partial W} = 2X^{\mathrm{T}}XW - 2X^{\mathrm{T}}Y \]
+                        Setting $\frac{\partial J}{\partial W} = 0$, we get
+                        \[X^{\mathrm{T}}XW = X^{\mathrm{T}}Y \]
+                        \[W = (X^{\mathrm{T}}X)^{-1}X^{\mathrm{T}}Y \]
+                    
+                    </p>
+
+
+
                 </div>
 
                 <div style="margin:20px; padding:10px; border:1px solid #ddd; border-radius:6px;">
