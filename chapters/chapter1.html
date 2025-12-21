@@ -285,8 +285,27 @@
                     </p>
                 </div>
             </p>
+        </div>
+        
+        <div>
+            <h3>Multiclass Classification -> Categorical Cross Entropy(CCE)</h3>
+            <p>
+                For multiclass classification problems, we use Categorical Cross Entropy (CCE) loss function.<br>
+                \[ J_{CCE} = - \sum_{i=1}^{K} y_i \log(\hat{y}_i) \]
+                where \(K\) is the number of classes, \(y_i\) is the true label.<br>
+                The softmax function is used to convert logits into probabilities for each class.<br>
+                \[\hat{y}_i = \frac{e^{z_i}}{\sum_{k=1}^{K} e^{z_k}} \]
+                where \(z_i\) is the logit for class \(i\).
+            </p>
 
-        </div>    
+        </div>
+
+        <div>
+            
+
+
+
+        </div>
 
 
 
