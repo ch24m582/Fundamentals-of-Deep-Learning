@@ -242,6 +242,34 @@
 
                 <br> More confidently you make mistake, the loss function will peanlize more
             </p>
+        <div>  
+            <h3>Deriving Gradient for Logistic Regression with BCE loss</h3>  
+            <p>
+                Gradient Setup of logistic regression with BCE loss:<br>
+                <img src="../assets/log_gradient_setup.png" 
+                        alt="log_gradient_setup" 
+                        class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" 
+                        loading="lazy">
+                \[J = -y \ln(\hat{y}) - (1-y) \ln(1-\hat{y})   \]
+                \[\hat{y} = \sigma(z) = \frac{1}{1+e^{-z}} \]
+                \[z = w^{\mathrm{T}} x = w_0 + w_1 x_1  \]
+                \[ \frac{\partial J}{\partial w_0} = \frac{\partial J}{\partial \hat{y} } \frac{\partial \hat{y}}{\partial {z} } \frac{\partial z}{\partial {w_0} }
+                ,&nbsp;&nbsp; \frac{\partial J}{\partial w_1} = \frac{\partial J}{\partial \hat{y} } \frac{\partial \hat{y}}{\partial {z} } \frac{\partial z}{\partial {w_1} } \]
+                
+                \[\frac{\partial J}{\partial \hat{y} } = -\frac{y}{\hat{y}} + \frac{1-y}{1-\hat{y}} = \frac{\hat{y} - y}{\hat{y}(1-\hat{y})} \]
+                \[\frac{\partial \hat{y}}{\partial {z} } = \left(\frac{e^{-z}}{1+e^{-z}}\right) \left(\frac{1}{1+e^{-z}}\right) =\hat{y}(1-\hat{y}) \]
+                
+                
+
+
+
+
+
+            </p>
+
+
+
             <p>
                 <div style="margin:20px; padding:10px; border:1px solid #ddd; border-radius:6px;">
                     <h3 style="margin-top:0;">Logistic Gradient Descent Notebook</h3>
@@ -254,8 +282,7 @@
                 </div>
             </p>
 
-
-
+        </div>    
 
 
 
