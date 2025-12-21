@@ -227,16 +227,31 @@
                         loading="lazy">
             </p>
 
+            <p>
+                so, derive a new cost function for classidfication problems called Binary Cross Entropy (BCE) loss.<br>
+                \[ J(y,\hat{y}) = -y \log(\hat{y}) - (1-y) \log(1-\hat{y}) \]
+            </p>
+            <p>
+                Example showing it is a better loss function:<br>
+                Eg: Let us say that Truth is cancer and \(y = 1\), and \(\hat{y}\) = 0.8<br>
+                \[ J_{BCE} = -1 \log(0.8) - (1-1) \log(1-0.8) = -\log(0.8) \approx 0.223 \]<br>
+                Now, let us say that Truth is no cancer and \(y = 0\), and \(\hat{y} \approx 0  or \epsilon\)<br>
+                \[ J_{BCE} = - (1-0) \log(1-\epsilon) = -\log(0.8) \approx -\log(1) -> 0 \]
+                Assume \(y =1\) and \(\hat{y} = 0.0\)<br>
+                the cost will be very high as \(-\log(0) -> \infty\)
 
-
-
-
-
-
-
-
-
+                <br> More confidently you make mistake, the loss function will peanlize more
+            </p>
             
+
+
+
+
+
+
+
+
+
 
             
         </div>    
