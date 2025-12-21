@@ -311,12 +311,24 @@
             </p>
             <p>
                 \[x = a0 \quad  z1 = a_0 w_1 \quad z2 = w_2 a_1 \quad z3 = w_3 a_2 \]
-                \[\quad \quad \quad \quad a_1 = g(z_1) \quad a_2 = g(z_2) \quad a_3 = g(z_3) 
-                \]
-                
+                \[\quad \quad \quad \quad a_1 = g(z_1) \quad a_2 = g(z_2) \quad a_3 = g(z_3) \]
+                Finite Difference Method to compute gradients:<br>
+                \[\frac{\partial J}{\partial w_3} = \frac{J(w_3 + \Delta w) - J(w_3)}{\Delta w} \]
+                \[\frac{\partial J}{\partial w_2} = \frac{J(w_2 + \Delta w) - J(w_2)}{\Delta w} \]
+                \[\frac{\partial J}{\partial w_1} = \frac{J(w_1 + \Delta w) - J(w_1)}{\Delta w} \]
+                Change \(w_3\) from 1 to 1.0001 and see the change in J to compute \(\frac{\partial J}{\partial w_3}\)<br>
+                similarly for \(w_2\) and \(w_1\).<br><br>
+                To estimate gradient using FDM is computationally expensive as we need to do forward pass for each weight perturbation.<br>
+                <b>Solution</b>: Use Backpropagation to compute gradients efficiently using chain rule.
+                </p>
 
-                
-                
+                <p>
+                    Simple Neural Network
+                    <img src="../assets/basicnn.png" 
+                        alt="log_gradient_setup" 
+                        class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" 
+                        loading="lazy">
                 </p>
 
         </div>
