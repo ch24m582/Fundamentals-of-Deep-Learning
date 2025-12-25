@@ -418,6 +418,13 @@
 
                 Finally let us write the complete back propagation algorithm:
                 Backpropagation Algorithm:
+                
+                <img src="../assets/error_deltaflow.png" 
+                    alt="log_gradient_setup" 
+                    class="context-image"
+                    style="max-width: 100%; height: auto; display: block; margin: 0 auto;" 
+                    loading="lazy">
+
                 <ol>
                     <li>Compute \(e_3 = (\hat{y} - y)\)</li>
                     <li>Compute \(\delta_3 = e_3 \cdot g'(z_3)\)</li>
@@ -430,6 +437,13 @@
                     <li>Compute \(\frac{\partial J}{\partial w_1} = \delta_1 \cdot a_0 \)</li>
                 </ol>   
 
+                <br>
+                <h3>Backpropagation for Neural Networks</h3>
+                <p>
+                    The backpropagation algorithm can be extended to neural networks with multiple chains and layers by applying the same principles of reusing computations of common terms and defining intermediate variables like \(\delta\) and \(e\) for each layer and neuron.<br>
+                    
+
+                </p>
                 
 
 
