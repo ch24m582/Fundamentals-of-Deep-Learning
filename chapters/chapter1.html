@@ -387,6 +387,21 @@
                     style="max-width: 100%; height: auto; display: block; margin: 0 auto;" 
                     loading="lazy">
 
+                \[\frac{\partial J}{\partial w_1} = \frac{\partial J}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a_3} \cdot \frac{\partial a_3}{\partial z_3} \cdot \frac{\partial z_3}{\partial a_2} \cdot \frac{\partial a_2}{\partial z_2} \cdot \frac{\partial z_2}{\partial a_1} \cdot \frac{\partial a_1}{\partial z_1} \cdot \frac{\partial z_1}{\partial w_1} \]
+                \[\frac{\partial J}{\partial w_2} = \frac{\partial J}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a_3} \cdot \frac{\partial a_3}{\partial z_3} \cdot \frac{\partial z_3}{\partial a_2} \cdot \frac{\partial a_2}{\partial z_2} \cdot \frac{\partial z_2}{\partial w_2} \]
+                \[\frac{\partial J}{\partial w_3} = \frac{\partial J}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a_3} \cdot \frac{\partial a_3}{\partial z_3} \cdot \frac{\partial z_3}{\partial w_3} \]
+                From above equations, we can see that we can reuse the computations of common terms to compute gradients efficiently.<br>
+                Let us define:
+                \[ \delta_3 = \frac{\partial J}{\partial z_3} = \frac{\partial J}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a_3} \cdot \frac{\partial a_3}{\partial z_3}   \]
+                \[ \delta_2 = \frac{\partial J}{\partial z_2} = \delta_3 \cdot \frac{\partial z_3}{\partial a_2} \cdot \frac{\partial a_2}{\partial z_2}  \]
+                \[ \delta_1 = \frac{\partial J}{\partial z_1} = \delta_2 \cdot \frac{\partial z_2}{\partial a_1} \cdot \frac{\partial a_1}{\partial z_1} \]
+                Then,
+                \[\frac{\partial J}{\partial w_3} = \delta_3 \cdot \frac{\partial z_3}{\partial w_3} \]
+                \[\frac{\partial J}{\partial w_2} = \delta_2 \cdot \frac{\partial z_2}{\partial w_2} \]     
+                \[\frac{\partial J}{\partial w_1} = \delta_1 \cdot \frac{\partial z_1}{\partial w_1} \]
+
+
+
 
 
 
