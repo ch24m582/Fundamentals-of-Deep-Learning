@@ -499,7 +499,35 @@
                 </p>
                 <p>
                 <h3> Simple Neural Network for XOR</h3>
-                
+                    <img src="../assets/xor_nn_1.png" 
+                        alt="nn1" 
+                        class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" 
+                        loading="lazy">    
+                    <p>
+                        Forward Pass equations:<br>
+                        \[z_1 = w_1 \cdot x + b_1  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a_1 = \sigma(z_1) \] 
+                        \[z_2 = w_2 \cdot a_1 + b_2  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a_2 = \sigma(z_2) \] 
+                        \[\hat{y} = a_2 \]
+                        
+                        Note on derivative for BCE sigmoid case:<br>
+                        \[\sigma'(z) = \sigma(z)(1-\sigma(z)) \]
+                        \[\therefore \sigma'(z) = a(1-a) \]
+                        Backward Pass equations:<br>
+                        \[ \textcolor{green}{e_2} = \frac{\partial J}{\partial a_2} = \frac{\partial J}{\partial \hat{y}} \frac{\partial \hat{y}}{\partial a_2} = \textcolor{green}{(\hat{y} - y) \cdot 1}  \]
+                        \[ \textcolor{green}{\delta_2} = e_2 \cdot \sigma'(z_2) = \textcolor{green}{e_2 \cdot a_2(1-a_2)} \]
+                        \[ \textcolor{green}{e_1} = \textcolor{green}{\delta_2 \cdot w_2}  \]
+                        \[ \textcolor{green}{\delta_1} = e_1 \cdot \sigma'(z_1) = \textcolor{green}{e_1 \cdot a_1(1-a_1)} \]
+                        \[ \textcolor{green}{\frac{\partial J}{\partial w_2} = \delta_2 \cdot a_1} \]
+                        \[ \textcolor{green}{\frac{\partial J}{\partial b_2} = \delta_2 \cdot 1} \]
+                        \[ \textcolor{green}{\frac{\partial J}{\partial w_1} = \delta_1 \cdot x} \]
+                        \[ \textcolor{green}{\frac{\partial J}{\partial b_1} = \delta_1 \cdot 1} \]
+                        
+
+                    </p>
+
+
+
                 </p>
                 
 
