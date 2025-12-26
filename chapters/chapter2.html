@@ -66,20 +66,37 @@
                         Fixing the architecture to include memory cells, as seen in LSTMs and GRUs, helps mitigate this issue.
                     </p>
             </div>
-            
-        
-    
-
-    
-
-
-
-
-
-
-            
+            <div class="GRU section">
+                <h3>Gated Recurrent Units (GRU)</h3>
+                <p><strong>Motivation:</strong></p>
+                <p>
+                    GRUs were introduced to address the vanishing gradient problem in traditional RNNs.<br>
+                    They use gating mechanisms to control the flow of information, allowing the network to retain relevant information over longer sequences.
+                </p>
+                <img src="../assets/simplified_gru_eq.png" alt="GRU Equations" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
+                <p><strong>GRU Architecture:</strong></p>
+                <img src="../assets/gru_arch.png" alt="GRU Architecture" class="context-image"
+                        style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
         
         </div>    
+        <div class="LSTM section">
+            <h3>Long Short-Term Memory (LSTM)</h3>
+            <p><strong>Motivation:</strong></p>
+            <p>
+                LSTMs were developed to overcome the limitations of traditional RNNs in capturing long-term dependencies.<br>
+                They introduce a memory cell and gating mechanisms to regulate the flow of information, enabling the network to retain important information over extended sequences.
+            </p>
+            <img src="../assets/lstm_eq.png" alt="LSTM Equations" class="context-image"
+                    style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
+            <p><strong>LSTM Architecture:</strong></p>
+            <img src="../assets/lstm_arch.png" alt="LSTM Architecture" class="context-image"
+                    style="max-width: 100%; height: auto; display: block; margin: 0 auto;" loading="lazy"-->
+
+
+        </div>
+
+
 
         <footer>
             <p><a href="../index.html">Home</a> | <a href="chapter2.html">Next Chapter →</a></p>
