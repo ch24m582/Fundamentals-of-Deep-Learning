@@ -546,18 +546,81 @@
                                 </p>
                             </div>
                         </p>
-
-
-
-
                     </p>
-
-                    </p>
-
-
-
                 </p>
+            </p>
+        </div>
+
+        <div>
+        <h3>Practicl Considerations</h3>
+            <p>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li>
+                        When training a deep NN with activation \( \sigma \) (sigmoid) in backpropagation, we have:
+                        <br>
+                        \( \sigma'(z) = \sigma(z)(1-\sigma(z)) \) → applied recursively.
+                        <ul style="list-style-type: circle; margin-left: 25px; margin-top: 8px;">
+                        <li>
+                            Large positive \( z \) → \( \sigma(z) \approx 1 \), so \( \sigma'(z) \) is very small 
+                            <span style="color: #888;">(vanishing gradients)</span>.
+                        </li>
+                        <li>
+                            Large negative \( z \) → \( \sigma(z) \approx 0 \), so \( \sigma'(z) \) is very small 
+                            <span style="color: #888;">(vanishing gradients)</span>.
+                        </li>
+                        <li>
+                            <strong>Mitigations:</strong> use ReLU/LeakyReLU or \(tanh\), batch normalization, residual connections, or better initializations.
+                        </li>
+                        <li> \(tanh \) can go for more layers deep but stil show vanishing gradients.</li>
+                        <li> ReLU is more robust to vanishing gradients compared to \(tanh\).</li>
+                        </ul>
+                    </li>
+                </ul>
                 
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li>
+                        Consider the activation function \( g(z) \):
+                        <div style="margin-top:8px; margin-left:20px;">
+                    \[
+                        g(z) =
+                        \begin{cases}
+                            z, & z > 0 \\
+                            0, & z \leq 0
+                        \end{cases}
+                        \]
+
+
+                        </div>
+                        <ul style="list-style-type: circle; margin-left: 25px; margin-top: 8px;">
+                        <li>This is the <strong>ReLU (Rectified Linear Unit)</strong> activation function.</li>
+                        <li>It outputs the input directly if positive, otherwise zero.</li>
+                        <li>Derivative \( g'(z) \) is:
+                            <ul style="list-style-type: square; margin-left: 25px; margin-top: 6px;">
+                            <li>\( g'(z) = 1 \) for \( z > 0 \)</li>
+                            <li>\( g'(z) = 0 \) for \( z \leq 0 \)</li>
+                            </ul>
+                        </li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+            </p>    
+        </div>
+        
+        <div style="height: 50px;"> 
+            <h3>CNN</h3>
+            <p>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -565,12 +628,6 @@
 
 
             </p>
-
-
-
-
-
-
         </div>
 
 
